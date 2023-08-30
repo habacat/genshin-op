@@ -59,7 +59,7 @@ const Hero = () => (
               复旦原神玩家俱乐部
 			  <br /></span>
 			<span className="mont text-[18px] xl:text-[50px] lg:text-[40px] md:text-[25px] sm:text-[15px]">
-			  这里聚集着一大批志同道合的玩家，如果你也喜欢原神，欢迎你的加入~<br /> 　
+			  这里聚集着一大批志同道合的玩家，如果你也喜欢原神，欢迎你的加入~<br />请使用qq扫描左侧的群组二维码加入我们~<br /> 　
             </span>
           </p>
         </div>
