@@ -1,1 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genshin Impact 图片展示</title>
+    <style>
+        body {
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .image-container {
+            cursor: pointer;
+            transition: transform 0.3s;
+            max-width: 100%; /* 图片最大宽度为父元素的100% */
+        }
+
+        .image-container:hover {
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+
+<div id="imageContainer" class="image-grid"></div>
+
+<script>
+    // 请求JSON数据
+    Promise.all([
+        fetch('https://image.anosu.top/pixiv/json?r18=1&keyword=genshinimpact'),
+        fetch('https://image.anosu.top/pixiv/json?r18=1&keyword=genshinimpact'),
+        fetch('https://image.anosu.top/pixiv/json?r18=1&keyword=genshinimpact')
+    ])
+        .then(responses => Promise.all(responses.map(response => response.json())))
+        .then(data => {
+            const images = [];
+
+            // 获取每个JSON数据中的第一张图片的URL和标签
+            data.forEach(json => {
+                const firstImage = json[0];
+                const imageUrl = firstImage.url;
+                const tags = firstImage.tags;
+
+                images.push({ imageUrl, tags });
+            });
+
+            // 创建图片元素和标签列表
+            images.forEach(image => {
+                const imageElement = document.createElement('img');
+                imageElement.src = image.imageUrl;
+                imageElement.classList.add('image-container');
+
+                const tagsList = document.createElement('ul');
+                image.tags.forEach(tag => {
+                    const tagItem = document.createElement('li');
+                    tagItem.textContent = tag;
+                    tagsList.appendChild(tagItem);
+                });
+
+                // 点击图片时放大/缩小
+                imageElement.addEventListener('click', () => {
+                    if (imageElement.style.transform === 'scale(3)') {
+                        imageElement.style.transform = 'scale(1)';
+                    } else {
+                        imageElement.style.transform = 'scale(3)';
+                    }
+                });
+
+                const imageContainer = document.getElementById('imageContainer');
+                imageContainer.appendChild(imageElement);
+                imageContainer.appendChild(tagsList);
+            });
+        })
+        .catch(error => console.error('Error:', error));
+</script>
+
+</body>
+</html>
