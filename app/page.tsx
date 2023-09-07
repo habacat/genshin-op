@@ -4,6 +4,7 @@ import {
   Navbar,
   Hero,
   AboutUs,
+  Setu,
   Projects,
   Skills,
   Contact,
@@ -33,6 +34,7 @@ export default function Home() {
         >
           <Hero />
           <AboutUs />
+          <Setu />
           {/* <Projects />
           <Skills />
           <Contact />
