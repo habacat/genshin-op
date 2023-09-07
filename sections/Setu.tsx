@@ -10,7 +10,7 @@ import { sectionMediaQueries, sectionTopDivStyles } from '../constants'
 
 
 const Setu = () => {
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState<string[]>([]); // 指定初始值为字符串数组
 
   useEffect(() => {
     // 使用fetch进行GET请求获取图片数据
@@ -46,4 +46,3 @@ const Setu = () => {
 };
 
 export default Setu;
-
