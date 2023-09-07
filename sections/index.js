@@ -9,4 +9,4 @@ import Contact from './Contact'
 import Footer from './Footer'
 import Setu from './Setu'
 
-export { Navbar, Hero, AboutUs, Projects, Skills, Contact, Footer }
+export { Navbar, Hero, AboutUs, Projects, Skills, Contact, Footer, Setu }
