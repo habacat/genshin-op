@@ -1,13 +1,49 @@
 // setu.tsx
 'use client'
 
-import React from 'react'
+// setu.tsx
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { slideIn } from '../utils/motion'
 import { sectionMediaQueries, sectionTopDivStyles } from '../constants'
 
-const Setu = () => (
 
-<div className={`${sectionTopDivStyles} pt-[100px] xs:pt-[50px] overflow-x-hidden`} id="setu" > <div className={`${sectionMediaQueries} grid grid-cols-3 gap-4`}> {/* Images */} {[...Array(9)].map((_, index) => ( <motion.div key={index} variants={slideIn('bottom', 'spring', 0, 1)} initial="hidden" whileInView="show" className="relative" > <Image src={`https://image.anosu.top/pixiv/direct?r18=1&keyword=genshinimpact&page=${index + 1}`} alt={`Setu ${index + 1}`} width={640} height={800} layout="responsive" className="rounded-2xl" /> </motion.div> ))} </div> </div> )
-export default Setu
+const Setu = () => {
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    // 使用fetch进行GET请求获取图片数据
+    fetch('https://image.anosu.top/pixiv/direct?r18=1&keyword=genshinimpact')
+      .then((response) => response.json())
+      .then((data) => {
+        if (Array.isArray(data) && data.length >= 9) {
+          // 从响应数据中获取前9张图片的URL
+          const imageUrls = data.slice(0, 9);
+          setImages(imageUrls);
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching images:', error);
+      });
+  }, []);
+
+  return (
+    <div>
+      <h1>Setu Images</h1>
+      <div className="image-container">
+        {images.map((imageUrl, index) => (
+          <img
+            key={index}
+            src={imageUrl}
+            alt={`Setu Image ${index + 1}`}
+            className="setu-image"
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default Setu;
+
