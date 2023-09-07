@@ -7,6 +7,6 @@ import Projects from './Projects'
 import Skills from './Skills'
 import Contact from './Contact'
 import Footer from './Footer'
-import setu from './setu'
+import setu from './Setu'
 
 export { Navbar, Hero, AboutUs, Projects, Skills, Contact, Footer }
